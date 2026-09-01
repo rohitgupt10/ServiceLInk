@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+/* Custom styles */
+.custom-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-primary {
+  @apply text-indigo-600;
+}

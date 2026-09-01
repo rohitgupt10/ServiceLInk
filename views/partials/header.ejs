@@ -1,0 +1,62 @@
+  <script src="https://cdn.tailwindcss.com"></script>
+  <header class="bg-indigo-600 text-white shadow-md top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <a href="/" class="text-2xl font-bold">Service Friend</a>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="/" class="hover:text-indigo-200 transition-colors mr-2">Home</a>
+          <!-- Services Dropdown -->
+          <div class="relative group">
+            <a href="/services" class="hover:text-indigo-200 transition-colors flex items-center mr-2">
+              Services
+            </a>
+            <!-- Dropdown Menu -->
+            <div class="absolute left-0 mt-2 w-48 bg-white text-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+              <% if (navCategories && navCategories.length > 0) { %>
+                <% navCategories.forEach(category => { %>
+                  <a href="/services?category=<%= encodeURIComponent(category) %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700"><%= category %></a>
+                <% }); %>
+              <% } %>
+              <a href="/services" class="block px-4 py-2 font-bold border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">All Services</a>
+            </div>
+          </div>
+          <% if (user) { %>
+            <a class="" href="/bookings" class="hover:text-indigo-200 transition-colors mr-2">Bookings  </a>
+            <a href="/dashboard" class="hover:text-indigo-200 transition-colors mr-2">Profile</a>
+          <% } else { %>
+            <a href="/auth/login" class="hover:text-indigo-200 mr-2 transition-colors">Sign up / Login</a>
+          <% } %>
+        </div>
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-button" class="text-white hover:text-indigo-200 focus:outline-none">
+            <span class="text-2xl">☰</span>
+          </button>
+        </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="md:hidden hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1 bg-indigo-700">
+          <a href="/" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Home</a>
+          <a href="/services" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Services</a>
+          <% if (user) { %>
+            <a href="/bookings" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Bookings</a>
+            <a href="/dashboard" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Profile</a>
+            <a href="/auth/logout" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Logout</a>
+          <% } else { %>
+            <a href="/auth/login" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Login</a>
+            <a href="/auth/register" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Register</a>
+          <% } %>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <script>
+    // Toggle mobile menu
+    document.getElementById('mobile-menu-button').addEventListener('click', function () {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>

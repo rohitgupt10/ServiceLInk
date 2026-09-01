@@ -1,0 +1,149 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<main>
+    <section id="hero" class="relative bg-gradient-to-br from-indigo-50 to-blue-100 py-16 md:py-24 lg:py-32 overflow-hidden">
+        <div class="absolute inset-0 bg-pattern opacity-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center text-center">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight md:leading-snug">
+                Connect with Your <span class="text-indigo-600">Local Community</span>
+            </h1>
+            <p class="mt-6 text-lg sm:text-xl text-slate-700 max-w-3xl">
+                Find reliable local services or offer your skills. Service Friend makes it easy to connect and empower your neighborhood.
+            </p>
+            <div class="mt-10">
+                <a href="/services" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg shadow-md text-white bg-indigo-600 hover:bg-indigo-700 transition-transform transform hover:scale-105">
+                    Browse All Services
+                </a>
+            </div>
+            <!-- Search bar element -->
+            <div class="mt-8 w-full max-w-md">
+                <div class="relative flex items-center">
+                    <input type="text" id="search-input" placeholder="What are you looking for?" class="w-full pl-5 pr-12 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 text-slate-700 placeholder-slate-400 shadow-sm">
+                    <button type="button" id="search-button" class="absolute inset-y-0 right-0 flex items-center px-4 rounded-r-lg bg-indigo-400 text-white hover:bg-indigo-500 transition-colors">
+                        <span class="font-medium text-sm hidden sm:inline">🔍</span>
+                        <span class="sm:hidden text-lg">🔍</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popular Services Section -->
+    <section id="popular-services" class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 text-center">Popular Services</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto text-center">
+                Discover top services to get your tasks done quickly and efficiently.
+            </p>
+            <div class="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+                <a href="/services?category=Tutoring" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-book-open text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Tutoring</span>
+                </a>
+                <a href="/services?category=Furniture+Assembly" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-chair text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Furniture Assembly</span>
+                </a>
+                <a href="/services?category=Moving" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-truck-moving text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Help Moving</span>
+                </a>
+                <a href="/services?category=Cleaning" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-broom text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Cleaning</span>
+                </a>
+                <a href="/services?category=Tech+Support" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-laptop-code text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Tech Support</span>
+                </a>
+                <a href="/services?category=Gardening" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-leaf text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Gardening</span>
+                </a>
+                <a href="/services?category=Personal+Assistant" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-clipboard-list text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Personal Assistant</span>
+                </a>
+                <a href="/services?category=Delivery" class="group bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 text-center">
+                    <i class="fas fa-shipping-fast text-indigo-600 text-3xl mb-4 group-hover:text-indigo-700 transition-colors"></i>
+                    <span class="block text-base font-semibold text-slate-700 group-hover:text-indigo-600">Delivery</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">How It Works</h2>
+            <p class="mt-4 text-lg text-slate-600 max-w-2xl mx-auto">Connecting local service seekers and givers is simple.</p>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center p-6 bg-slate-50 rounded-lg shadow-sm border border-slate-200 transition-transform transform hover:scale-105 hover:shadow-md">
+                    <div class="bg-indigo-100 rounded-full p-4 inline-flex items-center justify-center text-indigo-600 mb-6">
+                        <span class="text-3xl">🔍</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">1. Find or Post</h3>
+                    <p class="mt-3 text-slate-600 text-center">
+                        Are you looking for help? Search for services. Do you offer skills? Create your listing.
+                    </p>
+                </div>
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center p-6 bg-slate-50 rounded-lg shadow-sm border border-slate-200 transition-transform transform hover:scale-105 hover:shadow-md">
+                    <div class="bg-green-100 rounded-full p-4 inline-flex items-center justify-center text-green-600 mb-6">
+                        <span class="text-3xl">🤝</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">2. Connect Directly</h3>
+                    <p class="mt-3 text-slate-600 text-center">
+                        View profiles, compare offerings, and contact providers directly to discuss your needs.
+                    </p>
+                </div>
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center p-6 bg-slate-50 rounded-lg shadow-sm border border-slate-200 transition-transform transform hover:scale-105 hover:shadow-md">
+                    <div class="bg-blue-100 rounded-full p-4 inline-flex items-center justify-center text-blue-600 mb-6">
+                        <span class="text-3xl">✨</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-slate-800">3. Get Things Done</h3>
+                    <p class="mt-3 text-slate-600 text-center">
+                        Engage the right professional, complete your tasks, and empower your local community.
+                    </p>
+                </div>
+            </div>
+            <p class="mt-3 text-slate-600 text-center">
+                Join our community as either a Service Provider or Service Seeker – whichever matches your needs.
+            </p>
+        </div>
+    </section>
+    <!-- Call to Action / Join Section -->
+    <section id="join-us" class="py-16 md:py-24 bg-indigo-700 text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold">Ready to Connect?</h2>
+            <p class="mt-4 text-lg max-w-2xl mx-auto opacity-90">
+                Whether you're looking for help or want to offer your skills, Service Friend is the place to start.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center">
+                <a href="/auth/register" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg shadow-md text-indigo-700 bg-white hover:bg-indigo-100 transition-transform transform hover:scale-105">
+                    Join as Service Seeker
+                </a>
+                <a href="/auth/register" class="inline-flex items-center justify-center px-8 py-3 border border-white text-base font-medium rounded-lg shadow-md text-white hover:bg-white hover:text-indigo-700 transition-transform transform hover:scale-105">
+                    Join as Service Giver
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+<script>
+    // Added JavaScript for search functionality
+    document.getElementById('search-button').addEventListener('click', function() {
+        const query = document.getElementById('search-input').value.trim();
+        if (query) {
+            window.location.href = `/services?q=${encodeURIComponent(query)}`;
+        }
+    });
+    // Optional: Allow Enter key to trigger search
+    document.getElementById('search-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            const query = this.value.trim();
+            if (query) {
+                window.location.href = `/services?q=${encodeURIComponent(query)}`;
+            }
+        }
+    });
+</script>

@@ -1,0 +1,64 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<main class="flex flex-col items-center justify-center py-12 px-6 bg-gradient-to-br from-slate-50 via-indigo-50 to-blue-50">
+  <div class="w-full max-w-4xl mx-auto bg-white/90 backdrop-blur-xl p-10 rounded-3xl shadow-2xl border border-white/30">
+    <!-- Welcome Header -->
+    <div class="mb-10 text-center">
+      <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-indigo-600 tracking-tight">
+        Welcome, <%= user.name %>!
+      </h1>
+    </div>
+    <!-- Error/Success Messages -->
+    <% if (error) { %>
+      <div class="mb-8 p-4 bg-red-50/95 border-l-4 border-red-600 text-red-800 rounded-xl shadow-sm">
+        <p class="text-sm font-medium"><i class="fas fa-exclamation-circle mr-2"></i><%= error %></p>
+      </div>
+    <% } %>
+    <% if (success) { %>
+      <div class="mb-8 p-4 bg-green-50/95 border-l-4 border-green-600 text-green-800 rounded-xl shadow-sm">
+        <p class="text-sm font-medium"><i class="fas fa-check-circle mr-2"></i><%= success %></p>
+      </div>
+    <% } %>
+    <!-- Profile Summary -->
+    <div class="mb-12">
+      <h2 class="text-2xl font-semibold text-slate-900 mb-6 tracking-tight text-center">Profile Details</h2>
+      <div class="p-8 bg-white/70 backdrop-blur-md rounded-2xl shadow-lg border border-white/20 hover:shadow-xl transition-all duration-300 transform">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div class="flex items-center gap-4">
+            <i class="fas fa-user text-indigo-500 text-lg"></i>
+            <div>
+              <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Name</span>
+              <p class="text-base font-semibold text-slate-900"><%= user.name %></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <i class="fas fa-envelope text-indigo-500 text-lg"></i>
+            <div>
+              <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Email</span>
+              <p class="text-base font-semibold text-slate-900"><%= user.email %></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <i class="fas fa-phone text-indigo-500 text-lg"></i>
+            <div>
+              <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Contact</span>
+              <p class="text-base font-semibold text-slate-900"><%= user.contact %></p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <i class="fas fa-briefcase text-indigo-500 text-lg"></i>
+            <div>
+              <span class="block text-xs font-medium text-slate-500 uppercase tracking-wider">Role</span>
+              <p class="text-base font-semibold text-slate-900"><%= user.role.charAt(0).toUpperCase() + user.role.slice(1) %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Logout Button -->
+    <div class="text-center">
+      <a href="/auth/logout" class="inline-block bg-red-600 text-white px-10 py-3 rounded-xl font-semibold text-base hover:bg-red-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+        <i class="fas fa-sign-out-alt mr-2"></i> Logout
+      </a>
+    </div>
+  </div>
+</main>
