@@ -1,0 +1,117 @@
+<%- include('partials/header') %>
+
+<div class="custom-container py-8">
+  <% if (error) { %>
+    <div class="alert alert-error">
+      <%= error %>
+    </div>
+  <% } else if (profile) { %>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Profile Header -->
+      <div class="md:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <div class="text-center">
+            <img src="<%= profile.avatar %>" alt="<%= profile.name %>" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+            <h1 class="text-2xl font-bold"><%= profile.name %></h1>
+            <p class="text-gray-600"><%= profile.role === 'provider' ? 'Service Provider' : 'Customer' %></p>
+            
+            <% if (profile.isVerified) { %>
+              <div class="mt-2 inline-block bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">
+                ✓ Verified
+              </div>
+            <% } %>
+          </div>
+
+          <% if (profile.bio) { %>
+            <div class="mt-4 border-t pt-4">
+              <p class="text-gray-700"><%= profile.bio %></p>
+            </div>
+          <% } %>
+
+          <div class="mt-4 border-t pt-4">
+            <p class="text-sm text-gray-600"><i class="fas fa-envelope"></i> <%= profile.email %></p>
+            <p class="text-sm text-gray-600"><i class="fas fa-phone"></i> <%= profile.contact %></p>
+          </div>
+
+          <% if (isSelfProfile) { %>
+            <button class="w-full mt-4 bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700">
+              Edit Profile
+            </button>
+          <% } %>
+        </div>
+
+        <!-- Stats Card -->
+        <div class="bg-white rounded-lg shadow-md p-6 mt-6">
+          <h3 class="font-bold mb-4">Statistics</h3>
+          <div class="space-y-3">
+            <div class="flex justify-between">
+              <span class="text-gray-600">Rating</span>
+              <span class="font-bold"><%= profile.averageRating.toFixed(1) %>/5 ⭐</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-gray-600">Reviews</span>
+              <span class="font-bold"><%= profile.totalReviews %></span>
+            </div>
+            <% if (profile.role === 'provider') { %>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Completed</span>
+                <span class="font-bold"><%= completedBookings %></span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-gray-600">Earnings</span>
+                <span class="font-bold">$<%= profile.totalEarnings.toFixed(2) %></span>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Content -->
+      <div class="md:col-span-2">
+        <!-- Reviews Section -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-bold mb-4">
+            <% if (profile.role === 'provider') { %>
+              Customer Reviews
+            <% } else { %>
+              Given Reviews
+            <% } %>
+          </h2>
+
+          <% if (reviews.length > 0) { %>
+            <div class="space-y-4">
+              <% reviews.forEach(review => { %>
+                <div class="border-b pb-4">
+                  <div class="flex items-start justify-between">
+                    <div class="flex items-center space-x-3">
+                      <img src="<%= review.user.avatar || 'https://via.placeholder.com/40' %>" alt="<%= review.user.name %>" class="w-10 h-10 rounded-full object-cover">
+                      <div>
+                        <p class="font-semibold"><%= review.user.name %></p>
+                        <p class="text-sm text-yellow-500">
+                          <% for (let i = 0; i < review.rating; i++) { %>★<% } %><% for (let i = review.rating; i < 5; i++) { %>☆<% } %>
+                        </p>
+                      </div>
+                    </div>
+                    <span class="text-xs text-gray-500"><%= new Date(review.createdAt).toLocaleDateString() %></span>
+                  </div>
+                  <p class="text-gray-700 mt-2"><%= review.comment %></p>
+                  <% if (review.images && review.images.length > 0) { %>
+                    <div class="flex gap-2 mt-2">
+                      <% review.images.forEach(img => { %>
+                        <img src="<%= img %>" alt="Review" class="w-16 h-16 object-cover rounded">
+                      <% }) %>
+                    </div>
+                  <% } %>
+                </div>
+              <% }) %>
+            </div>
+          <% } else { %>
+            <p class="text-gray-500">No reviews yet.</p>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>

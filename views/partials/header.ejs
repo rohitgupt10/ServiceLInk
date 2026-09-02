@@ -3,13 +3,14 @@
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex items-center">
-          <a href="/" class="text-2xl font-bold">Service Friend</a>
+          <a href="/" class="text-2xl font-bold">🔗 ServiceLink</a>
         </div>
-        <div class="hidden md:flex items-center space-x-8">
-          <a href="/" class="hover:text-indigo-200 transition-colors mr-2">Home</a>
+        <div class="hidden md:flex items-center space-x-6">
+          <a href="/" class="hover:text-indigo-200 transition-colors">Home</a>
+          
           <!-- Services Dropdown -->
           <div class="relative group">
-            <a href="/services" class="hover:text-indigo-200 transition-colors flex items-center mr-2">
+            <a href="/services" class="hover:text-indigo-200 transition-colors flex items-center">
               Services
             </a>
             <!-- Dropdown Menu -->
@@ -19,14 +20,27 @@
                   <a href="/services?category=<%= encodeURIComponent(category) %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700"><%= category %></a>
                 <% }); %>
               <% } %>
-              <a href="/services" class="block px-4 py-2 font-bold border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">All Services</a>
+              <a href="/api/search" class="block px-4 py-2 font-bold border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">Advanced Search</a>
             </div>
           </div>
+
           <% if (user) { %>
-            <a class="" href="/bookings" class="hover:text-indigo-200 transition-colors mr-2">Bookings  </a>
-            <a href="/dashboard" class="hover:text-indigo-200 transition-colors mr-2">Profile</a>
+            <a href="/bookings" class="hover:text-indigo-200 transition-colors">Bookings</a>
+            <a href="/favorites" class="hover:text-indigo-200 transition-colors">❤️ Favorites</a>
+            <a href="/notifications" class="hover:text-indigo-200 transition-colors">🔔 Notifications</a>
+            <a href="/disputes" class="hover:text-indigo-200 transition-colors">Disputes</a>
+            
+            <!-- Profile Dropdown -->
+            <div class="relative group">
+              <a href="/profile/<%= user.id %>" class="hover:text-indigo-200 transition-colors">👤 Profile</a>
+              <div class="absolute right-0 mt-2 w-48 bg-white text-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <a href="/profile/<%= user.id %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">My Profile</a>
+                <a href="/dashboard" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">Dashboard</a>
+                <a href="/auth/logout" class="block px-4 py-2 border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">Logout</a>
+              </div>
+            </div>
           <% } else { %>
-            <a href="/auth/login" class="hover:text-indigo-200 mr-2 transition-colors">Sign up / Login</a>
+            <a href="/auth/login" class="hover:text-indigo-200 transition-colors">Sign up / Login</a>
           <% } %>
         </div>
         <!-- Mobile Menu Button -->
@@ -40,10 +54,15 @@
       <div id="mobile-menu" class="md:hidden hidden">
         <div class="px-2 pt-2 pb-3 space-y-1 bg-indigo-700">
           <a href="/" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Home</a>
+          <a href="/api/search" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Advanced Search</a>
           <a href="/services" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Services</a>
           <% if (user) { %>
             <a href="/bookings" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Bookings</a>
-            <a href="/dashboard" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Profile</a>
+            <a href="/favorites" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">❤️ Favorites</a>
+            <a href="/notifications" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">🔔 Notifications</a>
+            <a href="/disputes" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Disputes</a>
+            <a href="/profile/<%= user.id %>" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">👤 Profile</a>
+            <a href="/dashboard" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Dashboard</a>
             <a href="/auth/logout" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Logout</a>
           <% } else { %>
             <a href="/auth/login" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Login</a>

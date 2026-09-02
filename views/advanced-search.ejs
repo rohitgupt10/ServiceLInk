@@ -1,0 +1,140 @@
+<%- include('partials/header') %>
+
+<div class="custom-container py-8">
+  <div class="mb-8">
+    <h1 class="text-3xl font-bold mb-2">Advanced Search</h1>
+    <p class="text-gray-600">Find the perfect service for your needs</p>
+  </div>
+
+  <!-- Search Filters -->
+  <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+    <form id="searchForm" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div>
+        <label class="block text-sm font-semibold mb-2">Search</label>
+        <input type="text" name="query" placeholder="Service name..." class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Category</label>
+        <select name="category" class="w-full border rounded px-3 py-2">
+          <option value="all">All Categories</option>
+          <% if (navCategories && navCategories.length > 0) { %>
+            <% navCategories.forEach(cat => { %>
+              <option value="<%= cat %>"><%= cat %></option>
+            <% }) %>
+          <% } %>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Min Price</label>
+        <input type="number" name="minPrice" placeholder="0" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Max Price</label>
+        <input type="number" name="maxPrice" placeholder="1000" class="w-full border rounded px-3 py-2">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Min Rating</label>
+        <select name="rating" class="w-full border rounded px-3 py-2">
+          <option value="">All Ratings</option>
+          <option value="4">4+ Stars</option>
+          <option value="3">3+ Stars</option>
+          <option value="2">2+ Stars</option>
+          <option value="1">1+ Stars</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-2">Sort By</label>
+        <select name="sortBy" class="w-full border rounded px-3 py-2">
+          <option value="">Newest</option>
+          <option value="price_low">Price: Low to High</option>
+          <option value="price_high">Price: High to Low</option>
+          <option value="rating">Highest Rated</option>
+          <option value="popular">Most Popular</option>
+        </select>
+      </div>
+
+      <div class="flex items-end">
+        <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Results -->
+  <div id="results" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <p class="text-gray-500">Enter search criteria to see results</p>
+  </div>
+
+  <!-- Pagination -->
+  <div id="pagination" class="mt-8 flex justify-center gap-2"></div>
+</div>
+
+<script>
+let currentPage = 1;
+
+async function performSearch(page = 1) {
+  const formData = new FormData(document.getElementById('searchForm'));
+  const params = new URLSearchParams(formData);
+  params.set('page', page);
+
+  try {
+    const res = await fetch('/api/search/search?' + params.toString());
+    const data = await res.json();
+
+    // Display results
+    const resultsDiv = document.getElementById('results');
+    resultsDiv.innerHTML = '';
+
+    if (data.services && data.services.length > 0) {
+      data.services.forEach(service => {
+        const html = `
+          <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <img src="${service.thumbnail}" alt="${service.title}" class="w-full h-48 object-cover">
+            <div class="p-4">
+              <h3 class="font-bold text-lg mb-2">${service.title}</h3>
+              <p class="text-gray-600 text-sm mb-2">${service.description.substring(0, 100)}...</p>
+              <div class="flex justify-between items-center mb-2">
+                <span class="text-lg font-bold text-indigo-600">$${service.price}</span>
+                <span class="text-yellow-500">⭐ ${service.averageRating.toFixed(1)}</span>
+              </div>
+              <a href="/services/${service._id}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 w-full inline-block text-center">
+                View Details
+              </a>
+            </div>
+          </div>
+        `;
+        resultsDiv.innerHTML += html;
+      });
+
+      // Display pagination
+      const paginationDiv = document.getElementById('pagination');
+      paginationDiv.innerHTML = '';
+      for (let i = 1; i <= data.totalPages; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i;
+        btn.className = i === data.currentPage ? 'bg-indigo-600 text-white px-3 py-1 rounded' : 'border px-3 py-1 rounded hover:bg-gray-100';
+        btn.onclick = () => performSearch(i);
+        paginationDiv.appendChild(btn);
+      }
+    } else {
+      resultsDiv.innerHTML = '<p class="text-gray-500">No services found matching your criteria.</p>';
+    }
+  } catch (err) {
+    console.error(err);
+    document.getElementById('results').innerHTML = '<p class="text-red-500">Error performing search</p>';
+  }
+}
+
+document.getElementById('searchForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  performSearch(1);
+});
+</script>
+
+<%- include('partials/footer') %>
