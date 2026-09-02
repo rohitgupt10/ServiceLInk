@@ -5,7 +5,7 @@ const Service = require("../models/Service");
 
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next) {
-  if (req.session.userId) {
+  if (req.session.user && req.session.user.id) {
     next();
   } else {
     res.status(401).json({ message: "Please log in first" });
@@ -18,7 +18,7 @@ router.post("/add", isLoggedIn, async (req, res) => {
     const { serviceId } = req.body;
 
     const favorite = new Favorite({
-      user: req.session.userId,
+      user: req.session.user.id,
       service: serviceId,
     });
 
@@ -41,7 +41,7 @@ router.post("/remove", isLoggedIn, async (req, res) => {
     const { serviceId } = req.body;
 
     await Favorite.findOneAndDelete({
-      user: req.session.userId,
+      user: req.session.user.id,
       service: serviceId,
     });
 
@@ -56,7 +56,7 @@ router.post("/remove", isLoggedIn, async (req, res) => {
 // Get user's favorite services
 router.get("/my-favorites", isLoggedIn, async (req, res) => {
   try {
-    const favorites = await Favorite.find({ user: req.session.userId })
+    const favorites = await Favorite.find({ user: req.session.user.id })
       .populate({
         path: "service",
         populate: { path: "provider", select: "name avatar averageRating" },
@@ -75,7 +75,7 @@ router.get("/my-favorites", isLoggedIn, async (req, res) => {
 router.get("/is-favorited/:serviceId", isLoggedIn, async (req, res) => {
   try {
     const favorite = await Favorite.findOne({
-      user: req.session.userId,
+      user: req.session.user.id,
       service: req.params.serviceId,
     });
 

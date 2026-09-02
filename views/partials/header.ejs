@@ -26,13 +26,13 @@
 
           <% if (user) { %>
             <a href="/bookings" class="hover:text-indigo-200 transition-colors">Bookings</a>
-            <a href="/favorites" class="hover:text-indigo-200 transition-colors">❤️ Favorites</a>
-            <a href="/notifications" class="hover:text-indigo-200 transition-colors">🔔 Notifications</a>
+            <a href="/favorites" class="hover:text-indigo-200 transition-colors"> Favorites</a>
+            <a href="/notifications" class="hover:text-indigo-200 transition-colors"> Notifications</a>
             <a href="/disputes" class="hover:text-indigo-200 transition-colors">Disputes</a>
             
             <!-- Profile Dropdown -->
             <div class="relative group">
-              <a href="/profile/<%= user.id %>" class="hover:text-indigo-200 transition-colors">👤 Profile</a>
+              <a href="/profile/<%= user.id %>" class="hover:text-indigo-200 transition-colors"> Profile</a>
               <div class="absolute right-0 mt-2 w-48 bg-white text-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <a href="/profile/<%= user.id %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">My Profile</a>
                 <a href="/dashboard" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">Dashboard</a>

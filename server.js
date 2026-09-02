@@ -15,6 +15,7 @@ const profileRoutes = require("./routes/profile");
 const disputesRoutes = require("./routes/disputes");
 const ejsLayouts = require("express-ejs-layouts");
 const Service = require("./models/Service");
+const Favorite = require("./models/Favorite");
 
 dotenv.config();
 const app = express();
@@ -66,12 +67,45 @@ app.use(async (req, res, next) => {
 app.use("/auth", authRoutes);
 app.use("/services", serviceRoutes);
 app.use("/bookings", bookingRoutes);
-app.use("/", usersRoutes);
 app.use("/api/favorites", favoritesRoutes);
 app.use("/api/notifications", notificationsRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/profile", profileRoutes);
 app.use("/api/disputes", disputesRoutes);
+
+// Page routes for the authenticated navigation links.
+const requireUser = (req, res, next) => {
+  if (req.session.user && req.session.user.id) {
+    return next();
+  }
+  res.redirect("/auth/login");
+};
+
+app.get("/favorites", requireUser, async (req, res) => {
+  try {
+    const favorites = await Favorite.find({ user: req.session.user.id })
+      .populate({
+        path: "service",
+        populate: { path: "provider", select: "name avatar averageRating" },
+      })
+      .sort({ createdAt: -1 });
+
+    res.render("favorites", { favorites, user: req.session.user });
+  } catch (err) {
+    console.error("Error loading favorites:", err);
+    res.render("favorites", { favorites: [], user: req.session.user });
+  }
+});
+
+app.get("/notifications", requireUser, (req, res) => {
+  res.render("notifications", { user: req.session.user });
+});
+
+app.get("/disputes", requireUser, (req, res) => {
+  res.render("disputes", { user: req.session.user });
+});
+
+app.use("/", usersRoutes);
 
 app.get("/", async (req, res) => {
   try {

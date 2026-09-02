@@ -4,7 +4,7 @@ const Notification = require("../models/Notification");
 
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next) {
-  if (req.session.userId) {
+  if (req.session.user && req.session.user.id) {
     next();
   } else {
     res.status(401).json({ message: "Please log in first" });
@@ -14,12 +14,12 @@ function isLoggedIn(req, res, next) {
 // Get all notifications for user
 router.get("/all", isLoggedIn, async (req, res) => {
   try {
-    const notifications = await Notification.find({ user: req.session.userId })
+    const notifications = await Notification.find({ user: req.session.user.id })
       .sort({ createdAt: -1 })
       .limit(50);
 
     const unreadCount = await Notification.countDocuments({
-      user: req.session.userId,
+      user: req.session.user.id,
       read: false,
     });
 
@@ -35,7 +35,7 @@ router.get("/all", isLoggedIn, async (req, res) => {
 router.get("/unread", isLoggedIn, async (req, res) => {
   try {
     const unreadNotifications = await Notification.find({
-      user: req.session.userId,
+      user: req.session.user.id,
       read: false,
     }).sort({ createdAt: -1 });
 
@@ -65,7 +65,7 @@ router.put("/:notificationId/read", isLoggedIn, async (req, res) => {
 router.put("/mark-all-read", isLoggedIn, async (req, res) => {
   try {
     await Notification.updateMany(
-      { user: req.session.userId, read: false },
+      { user: req.session.user.id, read: false },
       { read: true },
     );
     res.json({ message: "All notifications marked as read", success: true });

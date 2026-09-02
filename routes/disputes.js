@@ -6,7 +6,7 @@ const Notification = require("../models/Notification");
 
 // Middleware to check if user is logged in
 function isLoggedIn(req, res, next) {
-  if (req.session.userId) {
+  if (req.session.user && req.session.user.id) {
     next();
   } else {
     res.status(401).json({ message: "Please log in first" });
@@ -27,7 +27,7 @@ router.post("/create", isLoggedIn, async (req, res) => {
 
     const dispute = new Dispute({
       booking: bookingId,
-      initiatedBy: req.session.userId,
+      initiatedBy: req.session.user.id,
       title,
       description,
     });
@@ -60,7 +60,7 @@ router.post("/create", isLoggedIn, async (req, res) => {
 // Get disputes for user
 router.get("/my-disputes", isLoggedIn, async (req, res) => {
   try {
-    const disputes = await Dispute.find({ initiatedBy: req.session.userId })
+    const disputes = await Dispute.find({ initiatedBy: req.session.user.id })
       .populate("booking")
       .sort({ createdAt: -1 });
 
@@ -79,7 +79,7 @@ router.get("/provider-disputes", isLoggedIn, async (req, res) => {
 
     // Get all services by this provider
     const services = await Service.find({
-      provider: req.session.userId,
+      provider: req.session.user.id,
     }).select("_id");
     const serviceIds = services.map((s) => s._id);
 
