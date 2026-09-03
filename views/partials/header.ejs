@@ -1,16 +1,15 @@
-  <script src="https://cdn.tailwindcss.com"></script>
-  <header class="bg-indigo-600 text-white shadow-md top-0 z-50">
+  <header class="site-header text-white sticky top-0 z-50">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
+      <div class="flex h-14 justify-between">
         <div class="flex items-center">
-          <a href="/" class="text-2xl font-bold">🔗 ServiceLink</a>
+          <a href="/" class="brand-mark text-2xl font-bold"><span>+</span> ServiceLink</a>
         </div>
         <div class="hidden md:flex items-center space-x-6">
-          <a href="/" class="hover:text-indigo-200 transition-colors">Home</a>
+          <a href="/" class="nav-link">Home</a>
           
           <!-- Services Dropdown -->
           <div class="relative group">
-            <a href="/services" class="hover:text-indigo-200 transition-colors flex items-center">
+              <a href="/services" class="nav-link flex items-center">
               Services
             </a>
             <!-- Dropdown Menu -->
@@ -20,19 +19,19 @@
                   <a href="/services?category=<%= encodeURIComponent(category) %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700"><%= category %></a>
                 <% }); %>
               <% } %>
-              <a href="/api/search" class="block px-4 py-2 font-bold border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">Advanced Search</a>
+              <a href="/advanced-search" class="block px-4 py-2 font-bold border-t border-slate-200 hover:bg-indigo-100 hover:text-indigo-700">Advanced Search</a>
             </div>
           </div>
 
           <% if (user) { %>
-            <a href="/bookings" class="hover:text-indigo-200 transition-colors">Bookings</a>
-            <a href="/favorites" class="hover:text-indigo-200 transition-colors"> Favorites</a>
-            <a href="/notifications" class="hover:text-indigo-200 transition-colors"> Notifications</a>
-            <a href="/disputes" class="hover:text-indigo-200 transition-colors">Disputes</a>
+            <a href="/bookings" class="nav-link">Bookings</a>
+            <a href="/favorites" class="nav-link">Favorites</a>
+            <a href="/notifications" class="nav-link">Notifications</a>
+            <a href="/disputes" class="nav-link">Disputes</a>
             
             <!-- Profile Dropdown -->
             <div class="relative group">
-              <a href="/profile/<%= user.id %>" class="hover:text-indigo-200 transition-colors"> Profile</a>
+              <a href="/profile/<%= user.id %>" class="nav-link">Profile</a>
               <div class="absolute right-0 mt-2 w-48 bg-white text-slate-800 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <a href="/profile/<%= user.id %>" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">My Profile</a>
                 <a href="/dashboard" class="block px-4 py-2 hover:bg-indigo-100 hover:text-indigo-700">Dashboard</a>
@@ -40,7 +39,7 @@
               </div>
             </div>
           <% } else { %>
-            <a href="/auth/login" class="hover:text-indigo-200 transition-colors">Sign up / Login</a>
+            <a href="/auth/login" class="nav-link">Sign up / Login</a>
           <% } %>
         </div>
         <!-- Mobile Menu Button -->
@@ -52,9 +51,9 @@
       </div>
       <!-- Mobile Menu -->
       <div id="mobile-menu" class="md:hidden hidden">
-        <div class="px-2 pt-2 pb-3 space-y-1 bg-indigo-700">
+        <div class="px-2 pt-2 pb-3 space-y-1 bg-slate-900">
           <a href="/" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Home</a>
-          <a href="/api/search" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Advanced Search</a>
+          <a href="/advanced-search" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Advanced Search</a>
           <a href="/services" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Services</a>
           <% if (user) { %>
             <a href="/bookings" class="block px-3 py-2 text-white hover:bg-indigo-800 rounded-md">Bookings</a>

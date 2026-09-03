@@ -105,6 +105,10 @@ app.get("/disputes", requireUser, (req, res) => {
   res.render("disputes", { user: req.session.user });
 });
 
+app.get("/advanced-search", (req, res) => {
+  res.render("advanced-search", { user: req.session.user });
+});
+
 app.use("/", usersRoutes);
 
 app.get("/", async (req, res) => {

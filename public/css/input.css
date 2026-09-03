@@ -1,11 +1,234 @@
 @import "tailwindcss";
 
-/* Custom styles */
+@theme {
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --color-ink: #17212b;
+  --color-muted: #65717d;
+  --color-paper: #f6f7f4;
+  --color-surface: #ffffff;
+  --color-accent: #e46345;
+  --color-accent-dark: #bf4a31;
+  --color-line: #dfe4e0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+
+a,
+button,
+input,
+select {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.site-header {
+  background: rgba(23, 33, 43, 0.96);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 5px 20px rgba(23, 33, 43, 0.12);
+}
+
+.site-header a {
+  color: #dce5e2;
+}
+
+.site-header a:hover {
+  color: #ffffff;
+}
+
+.brand-mark {
+  color: #ffffff !important;
+  font-family: var(--font-display);
+  letter-spacing: -0.04em;
+}
+
+.brand-mark span {
+  color: #f28a6b;
+}
+
+.nav-link {
+  border-bottom: 2px solid transparent;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 0.35rem 0;
+}
+
+.nav-link:hover {
+  border-bottom-color: #f28a6b;
+}
+
+.content-shell {
+  width: min(100% - 2rem, 80rem);
+  margin-inline: auto;
+}
+
+.site-footer {
+  background: #17212b;
+  color: #aebbb8;
+  font-size: 0.8rem;
+}
+
+.site-footer a:hover {
+  color: #ffffff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.home-hero {
+  background: linear-gradient(120deg, #edf3f0 0%, #f6f7f4 62%, #fbe9e2 100%);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.hero-kicker {
+  color: var(--color-accent-dark);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 5rem);
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  max-width: 48rem;
+}
+
+.hero-title span {
+  color: var(--color-accent);
+}
+
+.hero-search {
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 16px 38px rgba(23, 33, 43, 0.1);
+}
+
+.hero-search input:focus {
+  outline: 2px solid rgba(228, 99, 69, 0.25);
+  outline-offset: 2px;
+}
+
+.primary-action {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.primary-action:hover {
+  background: var(--color-accent-dark);
+  transform: translateY(-1px);
+}
+
+.secondary-action {
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+}
+
+.secondary-action:hover {
+  background: var(--color-ink);
+  color: #ffffff;
+}
+
+.service-tile {
+  border: 1px solid var(--color-line);
+  box-shadow: 0 5px 16px rgba(23, 33, 43, 0.04);
+}
+
+.service-tile:hover {
+  border-color: #e8a18d;
+  box-shadow: 0 12px 26px rgba(23, 33, 43, 0.1);
+  transform: translateY(-3px);
+}
+
+.step-card {
+  border-top: 3px solid var(--color-accent);
+}
+
+.join-band {
+  background: #17212b;
+  border-top: 4px solid var(--color-accent);
+}
+
+.join-label {
+  color: #f28a6b;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.join-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.join-copy {
+  color: #b7c3c0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-width: 34rem;
+}
+
+.join-action {
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 0.375rem;
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.7rem 1rem;
+  white-space: nowrap;
+}
+
+.join-action:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #17212b;
+}
+
+.join-action-primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.join-action-primary:hover {
+  background: #f28a6b;
+  border-color: #f28a6b;
+}
+
+@media (max-width: 640px) {
+  .content-shell {
+    width: min(100% - 1.25rem, 80rem);
+  }
+}
+
 .custom-container {
-  max-width: 1200px;
+  width: min(100% - 2rem, 80rem);
   margin: 0 auto;
 }
 
 .text-primary {
-  @apply text-indigo-600;
+  color: var(--color-accent);
 }
